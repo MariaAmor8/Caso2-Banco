@@ -10,11 +10,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import Logica.Banco;
+
 public class FPrincipal extends JFrame{
 	JTextField txtNumero;
 	JTextField txtMonto;
+	Banco banco;
 	
 	public void ejecutar() {
+		this.banco = new Banco();
+		banco.crearCuenta("10-2", 3, 30000, 100000);
+		
 		this.setPreferredSize(new Dimension(350,250));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
@@ -29,18 +35,26 @@ public class FPrincipal extends JFrame{
 		this.txtMonto = new JTextField();
 		this.add(this.txtMonto);
 		
-		JButton bEnviar = new JButton("Enviar");
+		JButton bEnviar = new JButton("Retirar");
 		this.add(bEnviar);
 		bEnviar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				hacerTransaccion();
 			}
 		});
 		
 		this.pack();
+	}
+
+	protected void hacerTransaccion() {
+		String numeroCuenta = this.txtNumero.getText();
+		int monto = Integer.parseInt(this.txtMonto.getText());
+		this.banco.hacerTransaccion(monto, numeroCuenta);
+		
+		this.txtMonto.setText("");
+		this.txtNumero.setText("");
 	}
 
 	public static void main(String[] args) {
