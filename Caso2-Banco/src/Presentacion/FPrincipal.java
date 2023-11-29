@@ -21,7 +21,7 @@ public class FPrincipal extends JFrame{
 	
 	public void ejecutar() {
 		this.banco = new Banco();
-		banco.crearCuenta("10-2", 3, 30000, 100000);
+		banco.crearCuenta("10-2", 3, 30, 100);
 		
 		this.setPreferredSize(new Dimension(350,250));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -55,6 +55,7 @@ public class FPrincipal extends JFrame{
 		int monto = Integer.parseInt(this.txtMonto.getText());
 		try {
 			this.banco.hacerTransaccion(monto, numeroCuenta);
+			JOptionPane.showMessageDialog(this, "Proceso exitoso");
 		} catch (MiExcepcion e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}

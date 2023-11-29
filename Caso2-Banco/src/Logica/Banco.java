@@ -18,10 +18,14 @@ public class Banco {
 		return null;
 	}
 	
-	public boolean hacerTransaccion(int monto, String cuenta) throws MiExcepcion {
+	public void hacerTransaccion(int monto, String cuenta) throws MiExcepcion {
 		Cuenta cuentaTransf = this.buscarCuenta(cuenta);
-		cuentaTransf.retirarDinero(monto);
-		return true;
+		if(cuentaTransf == null) {
+			throw new MiExcepcion("la cuenta no existe");
+		}
+		else {
+			cuentaTransf.retirarDinero(monto);
+		}
 	}
 	
 	public void crearCuenta(String numeroCuenta, int maximoRetiros, int valorMaximoARetirar, int capital) {
