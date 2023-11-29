@@ -18,7 +18,7 @@ public class Banco {
 		return null;
 	}
 	
-	public boolean hacerTransaccion(int monto, String cuenta) {
+	public boolean hacerTransaccion(int monto, String cuenta) throws MiExcepcion {
 		Cuenta cuentaTransf = this.buscarCuenta(cuenta);
 		cuentaTransf.retirarDinero(monto);
 		return true;

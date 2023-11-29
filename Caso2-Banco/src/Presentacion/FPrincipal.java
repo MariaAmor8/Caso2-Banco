@@ -8,9 +8,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Logica.Banco;
+import Logica.MiExcepcion;
 
 public class FPrincipal extends JFrame{
 	JTextField txtNumero;
@@ -51,7 +53,11 @@ public class FPrincipal extends JFrame{
 	protected void hacerTransaccion() {
 		String numeroCuenta = this.txtNumero.getText();
 		int monto = Integer.parseInt(this.txtMonto.getText());
-		this.banco.hacerTransaccion(monto, numeroCuenta);
+		try {
+			this.banco.hacerTransaccion(monto, numeroCuenta);
+		} catch (MiExcepcion e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
 		
 		this.txtMonto.setText("");
 		this.txtNumero.setText("");
